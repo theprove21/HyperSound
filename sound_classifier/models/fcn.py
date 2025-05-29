@@ -6,6 +6,8 @@ from datetime import datetime
 from tqdm import tqdm
 import pandas as pd
 import numpy as np
+import sys
+
 
 class Conv2d(nn.Module):
     def __init__(self, input_channels, output_channels, shape=3, stride=1, pooling=2):
@@ -139,12 +141,13 @@ class Net(nn.Module):
 def build_model(**kwargs):
 
     if torch.cuda.is_available():
-    device = torch.device("cuda:0")
+
+        device = torch.device("cuda:0")
     else:
-    device = torch.device("cpu")
+        device = torch.device("cpu")
     print(device)
 
     net = Net(device).to(device)
     print(net)
 
-    return Net(**kwargs)
+    return Net(device, **kwargs)
