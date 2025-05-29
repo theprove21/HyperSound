@@ -7,6 +7,8 @@ import pandas as pd
 from tqdm import tqdm
 
 from torchvision import transforms
+from datetime import datetime
+
 
 import importlib
 from pathlib import Path
@@ -46,6 +48,10 @@ def init_model(model_name: str, **build_kwargs):
           f"Module '{module_path}' must expose a "
           "`build_model()` function or a `Model` class."
       )
+  
+  device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+  model = model.to(device)
+  print(f"Model moved to: {device}")
 
   return model
     # determine if the system supports CUDA
