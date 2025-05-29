@@ -6,10 +6,12 @@ import numpy as np
 import pandas as pd
 from tqdm import tqdm
 
-from sound_classifier.models.hyper_cnn import Net
+from torchvision import transforms
+
+# from sound_classifier.models.hyper_cnn import Net
 from sound_classifier.utils.data_utils import normalize_data
 from sound_classifier.data.loader import UrbanSound8kDataset
-from sound_classifier.transforms.audio import MyRightShift, MyAddGaussNoise, MyReshape
+from sound_classifier.transformations.agumentations import MyRightShift, MyAddGaussNoise, MyReshape
 
 
 def available_models() -> list[str]:
@@ -54,7 +56,7 @@ def init_model(model_name: str, **build_kwargs):
 
     # return net
 
-def process_fold(fold_k, dataset_df, epochs=100, batch_size=32, num_of_workers=0, model_name):
+def process_fold(fold_k, dataset_df, model_name, epochs=100, batch_size=32, num_of_workers=0):
 
     # build transformation pipelines for data augmentation
     train_transforms = transforms.Compose([
