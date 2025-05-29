@@ -8,6 +8,9 @@ from tqdm import tqdm
 
 from torchvision import transforms
 
+import importlib
+from pathlib import Path
+
 # from sound_classifier.models.hyper_cnn import Net
 from sound_classifier.utils.data_utils import normalize_data
 from sound_classifier.data.loader import UrbanSound8kDataset
@@ -34,10 +37,10 @@ def init_model(model_name: str, **build_kwargs):
   module = importlib.import_module(module_path)
 
   if hasattr(module, "build_model"):
-      model = module.build_model(num_classes=num_classes, **build_kwargs)
+      model = module.build_model( **build_kwargs)
   elif hasattr(module, "Model"):
       model_cls = getattr(module, "Model")
-      model = model_cls(num_classes=num_classes, **build_kwargs)
+      model = model_cls( **build_kwargs)
   else:
       raise AttributeError(
           f"Module '{module_path}' must expose a "
