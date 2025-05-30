@@ -14,20 +14,20 @@ def main():
     # parser.add_argument("--epochs", type=int, default=100, help="Number of epochs.")
     # args = parser.parse_args()
 
-    dataset_path = "us8k_df.pkl"
+  dataset_path = "/content/gdrive/MyDrive/US8K/us8k_df.pkl"
 
-    us8k_df = pd.read_pickle(dataset_path)
+  us8k_df = pd.read_pickle(dataset_path)
 
-    FOLD_K = 1
-    REPEAT = 1
-    model_name = 'cnn_classic'
-    # Example: 10-fold cross validation
-    tot_history = []
-    for i in range(REPEAT):
-        history = process_fold(FOLD_K, us8k_df, epochs=100, num_of_workers=4,model_name=model_name)
-        tot_history.append(history)
+  FOLD_K = 1
+  REPEAT = 1
+  model_name = 'cnn_hyp'
+  # Example: 10-fold cross validation
+  tot_history = []
+  for i in range(REPEAT):
+      history = process_fold(FOLD_K, us8k_df, epochs=100, num_of_workers=4,model_name=model_name)
+      tot_history.append(history)
 
-    print("Training completed.")
+  print("Training completed.")
 
 if __name__ == "__main__":
     main()
