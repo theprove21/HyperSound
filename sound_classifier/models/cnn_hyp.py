@@ -41,7 +41,7 @@ class Net(nn.Module):
         self.max_pool2 = hnn.HMaxPool2d(kernel_size=(2,2), stride=2, manifold = self.manifold)
 
         self.criterion = nn.CrossEntropyLoss()            # lr=1e-03, weight_decay=5e-4
-        self.optimizer = RiemannianSGD(self.parameters(), lr=1e-03, nesterov=True)
+        self.optimizer = RiemannianSGD(self.parameters(), lr=1e-03, weight_decay=1e-03)
         # self.optimizer = optim.Adam(self.parameters(), lr=0.001, eps=1e-07, weight_decay=1e-3)
 
         self.device = device
