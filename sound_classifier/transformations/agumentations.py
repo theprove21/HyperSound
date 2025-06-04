@@ -3,7 +3,7 @@
 import torch
 import numpy as np
 import random
-
+import copy
 
 class MyRightShift(object):
     """Shift the image to the right in time."""

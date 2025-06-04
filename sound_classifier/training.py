@@ -18,7 +18,6 @@ from sound_classifier.utils.data_utils import normalize_data
 from sound_classifier.data.loader import UrbanSound8kDataset
 from sound_classifier.transformations.agumentations import MyRightShift, MyAddGaussNoise, MyReshape
 
-
 def available_models() -> list[str]:
     """Return a list of python modules in sound_classifier.models."""
     here = Path(__file__).parent / "models"
