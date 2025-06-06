@@ -68,11 +68,11 @@ def process_fold(fold_k, dataset_df, model_name, epochs=100, batch_size=32, num_
 
     # build transformation pipelines for data augmentation
     train_transforms = transforms.Compose([
-        # MyRightShift(input_size=128,
-        #                                                 width_shift_range=13,
-        #                                                 shift_probability=0.9),
-        #                                    MyAddGaussNoise(input_size=128,
-        #                                                    add_noise_probability=0.55),
+        MyRightShift(input_size=128,
+                                                        width_shift_range=13,
+                                                        shift_probability=0.9),
+                                           MyAddGaussNoise(input_size=128,
+                                                           add_noise_probability=0.55),
                                           MyReshape(output_size=(1,128,128))
                                           ])
 
