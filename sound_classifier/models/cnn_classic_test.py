@@ -103,7 +103,7 @@ class Net(nn.Module):
                 print(" - val_loss: %.4f - val_accuracy: %.4f" % (val_loss, val_acc))
 
             labels['preds'].append(val_preds)
-            lables['truth'].append(val_labels)
+            labels['truth'].append(val_labels)
             # store the model's training progress
             history['loss'].append(train_loss)
             history['accuracy'].append(train_acc)
