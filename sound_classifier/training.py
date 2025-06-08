@@ -128,8 +128,8 @@ def process_fold(fold_k, dataset_df, model_name, epochs=100, batch_size=32, num_
 
     # train the model
     start_time = datetime.now()
-    history = model.fit(train_loader, epochs=epochs, val_loader=test_loader)
+    history, labels = model.fit(train_loader, epochs=epochs, val_loader=test_loader)
     end_time = datetime.now() - start_time
     print("\nTraining completed in time: {}".format(end_time))
 
-    return history
+    return history, labels
