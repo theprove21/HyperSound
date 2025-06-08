@@ -145,8 +145,8 @@ class Net(nn.Module):
             running_acc = running_acc + torch.div(correct_predictions, batch_size)
     
             # collect for further analysis
-            all_preds.append(predictions)
-            all_labels.append(y_batch)
+            all_preds.append(predictions.cpu())
+            all_labels.append(y_batch.cpu())
     
         loss = running_loss.item() / (step+1)
         accuracy = running_acc.item() / (step+1)
