@@ -106,8 +106,8 @@ def process_fold(fold_k, dataset_df, model_name, epochs=100, batch_size=32, num_
     train_ds = UrbanSound8kDataset(train_df, transform=train_transforms)
     train_loader = DataLoader(train_ds,
                               batch_size=batch_size,
-                              shuffle = False,
-                              # shuffle = True,
+                              # shuffle = False,
+                              shuffle = True,
                               pin_memory=True,
                               num_workers=num_of_workers)
 

@@ -27,7 +27,7 @@ class Net(nn.Module):
 
 
         self.criterion = nn.CrossEntropyLoss()
-        self.optimizer = optim.Adam(self.parameters(), lr=1e-03, eps=1e-07, weight_decay=1e-3) #lr=0.001
+        self.optimizer = optim.Adam(self.parameters(), lr=0.001, eps=1e-07, weight_decay=1e-3) #lr=0.001
 
         self.device = device
 
