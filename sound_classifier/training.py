@@ -122,6 +122,7 @@ def process_fold(fold_k, dataset_df, model_name, epochs=100, batch_size=32, num_
     # init model
     model = init_model(model_name)
 
+
     # pre-training accuracy
     score = model.evaluate(test_loader)
     print("Pre-training accuracy: %.4f%%" % (100 * score[1]))

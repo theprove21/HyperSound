@@ -1,3 +1,4 @@
+from typing_extensions import _SpecialForm
 from hypll.manifolds.poincare_ball import Curvature, PoincareBall
 from hypll import nn as hnn
 from hypll.optim import RiemannianAdam, RiemannianSGD
@@ -87,6 +88,8 @@ class Net(nn.Module):
     def fit(self, train_loader, epochs, val_loader=None):
         history = {'loss':[], 'accuracy':[], 'val_loss':[], 'val_accuracy':[]}
 
+        labels = {'preds':[],'truth':[]}
+
         for epoch in range(epochs):
             self.train()
 
@@ -121,22 +124,24 @@ class Net(nn.Module):
                     pbar.update(1)
 
             # model evaluation - train data
-            train_loss, train_acc = self.evaluate(train_loader)
+            train_loss, train_acc, train_preds, train_labels = self.evaluate(train_loader)
             print("loss: %.4f - accuracy: %.4f" % (train_loss, train_acc), end='')
 
             # model evaluation - validation data
             val_loss, val_acc = None, None
             if val_loader is not None:
-                val_loss, val_acc = self.evaluate(val_loader)
+                val_loss, val_acc, val_preds, val_labels = self.evaluate(val_loader)
                 print(" - val_loss: %.4f - val_accuracy: %.4f" % (val_loss, val_acc))
 
+            labels['preds'].append(val_preds)
+            labels['truth'].append(val_labels)
             # store the model's training progress
-            history['loss'].append(train_loss)
+            history['loss'].append(train_loss.cpu())
             history['accuracy'].append(train_acc)
-            history['val_loss'].append(val_loss)
+            history['val_loss'].append(val_loss.cpu())
             history['val_accuracy'].append(val_acc)
 
-        return history
+        return history, labels
 
     def predict(self, X):
         self.eval()
@@ -151,6 +156,9 @@ class Net(nn.Module):
         running_acc = torch.tensor(0.0).to(self.device)
 
         batch_size = torch.tensor(data_loader.batch_size).to(self.device)
+
+        all_preds = []
+        all_labels = []
 
         for step, batch in enumerate(data_loader):
             X_batch = batch['spectrogram'].to(self.device)
@@ -167,10 +175,18 @@ class Net(nn.Module):
             correct_predictions = (predictions == y_batch).float().sum()
             running_acc = running_acc + torch.div(correct_predictions, batch_size)
 
+            # collect for further analysis
+            all_preds.append(predictions.cpu())
+            all_labels.append(y_batch.cpu())
+            
         # loss = running_loss.item() / (step+1)
         accuracy = running_acc.item() / (step+1)
 
-        return loss.item(), accuracy
+        # Concatenate all predictions and labels
+        all_preds = torch.cat(all_preds).numpy()
+        all_labels = torch.cat(all_labels).numpy()
+    
+        return loss, accuracy, all_preds, all_labels
 
 def build_model(**kwargs):
 
