@@ -69,8 +69,6 @@ class Net(nn.Module):
 
         ###############################################
         # move the inputs to the manifold
-        tangents = TangentTensor(data=x, man_dim=1, manifold=self.manifold)
-        x = self.manifold.expmap(tangents)
 
         # dense layer-1
         x = self.fc1(x)
