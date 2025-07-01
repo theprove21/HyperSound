@@ -2,11 +2,13 @@
 > **Author**: *Leonardo Provenzano <leonardoprovenzano21@gmail.com>*  
 > **Institution**: *University of Amsterdam*  
 
----
+
 
 ##   Data preprocessing
+
 Follow the instruction to download the data set [UrbanSound8K](https://urbansounddataset.weebly.com/) and use the data_preprocessing.ipynb to extract the 128x128 mel-spectrogram images
----
+
+
 
 ##   Run the models
 Run train.py to ouput the labels and store the loss and accuracies. 
