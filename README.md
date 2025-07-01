@@ -6,7 +6,7 @@
 
 ##   Data preprocessing
 
-Follow the instruction to download the data set [UrbanSound8K](https://urbansounddataset.weebly.com/) and use the data_preprocessing.ipynb ([mariostrbac])(https://github.com/mariostrbac/environmental-sound-classification.git) to extract the 128x128 mel-spectrogram images
+Follow the instruction to download the data set [UrbanSound8K](https://urbansounddataset.weebly.com/) and use the data_preprocessing.ipynb ([mariostrbac](https://github.com/mariostrbac/environmental-sound-classification.git)) to extract the 128x128 mel-spectrogram images
 
 
 
