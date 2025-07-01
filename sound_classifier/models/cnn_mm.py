@@ -75,7 +75,6 @@ class Net(nn.Module):
         # dense layer-1
         x = self.fc1(x)
         x = self.relu(x)
-        # TODO: How to add dropout to hyperbolic layers?
 
         # hyp dense output layer
         x = self.fc2(x)
@@ -100,8 +99,7 @@ class Net(nn.Module):
                     X_batch = batch['spectrogram'].to(self.device)
                     y_batch = batch['label'].to(self.device)
 
-                    # if step == 0:
-                    #   weight_before = net.conv1.weight.detach().clone() ## copy
+
 
                     # zero the parameter gradients
                     self.optimizer.zero_grad()
@@ -116,9 +114,7 @@ class Net(nn.Module):
                         # update the parameters
                         self.optimizer.step()
 
-                    # if step == 0:
-                    #   weight_after = net.conv1.weight.detach().clone() ## copy
-                    #   print(' weights are equal?: ',torch.equal(weight_after, weight_before))
+
 
 
                     pbar.update(1)
