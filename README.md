@@ -6,7 +6,7 @@
 
 ##   Data preprocessing
 
-Follow the instruction to download the data set [UrbanSound8K](https://urbansounddataset.weebly.com/) and use the data_preprocessing.ipynb to extract the 128x128 mel-spectrogram images
+Follow the instruction to download the data set [UrbanSound8K](https://urbansounddataset.weebly.com/) and use the data_preprocessing.ipynb[cool-repo](https://github.com/user/cool-repo) to extract the 128x128 mel-spectrogram images
 
 
 
